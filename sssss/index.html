@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BlinkChat</title>
+<meta name="theme-color" content="#0b141a">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<section id="landing" class="landing">
+  <div class="card">
+    <h1>BlinkChat</h1>
+    <p class="sub">Private room for text and voice. Nothing is saved.</p>
+    <label for="nick">Nickname</label>
+    <input id="nick" maxlength="20" autocomplete="off" placeholder="e.g. Rafi">
+    <button id="create" class="primary">Create a new room</button>
+    <div class="or">or join a friend's room</div>
+    <label for="rid">Room ID</label>
+    <input id="rid" maxlength="40" autocomplete="off" placeholder="Paste the Room ID">
+    <button id="join">Join room</button>
+    <p id="err" class="err" role="alert" hidden></p>
+    <p id="busy" class="busy" hidden><span class="spin"></span><span id="busyTxt"></span></p>
+    <details class="note"><summary>Privacy and limits</summary>
+      <p>Messages live only in memory and vanish when you leave or refresh. Chat and calls go directly between browsers (WebRTC, encrypted in transit), but this app adds no end-to-end encryption of its own and cannot stop anyone from screenshotting or copying.</p>
+      <p>A free public PeerJS signaling server helps browsers find each other and can see connection metadata (IP addresses, Room ID). It may be slow or down. Some networks need a TURN relay for voice. The person who created the room is the host: if they leave, the room ends.</p>
+    </details>
+  </div>
+</section>
+
+<section id="room" class="room" hidden>
+  <header>
+    <button id="peopleBtn" class="icon only-m" aria-label="Show participants">👥</button>
+    <div class="title"><strong id="rname">Room</strong><small id="rid-show"></small></div>
+    <span id="dot" class="dot" aria-hidden="true"></span><span id="status" class="status" role="status"></span>
+    <button id="copyId" class="small">Copy ID</button>
+    <button id="copyLink" class="small">Copy link</button>
+    <button id="leave" class="small danger">Leave</button>
+  </header>
+  <aside id="side">
+    <h2>Participants</h2>
+    <ul id="people"></ul>
+    <div class="voice">
+      <h2>Voice call</h2>
+      <p id="callInfo" class="muted">Not in a call. Voice uses a peer-to-peer mesh, best for about 4 people.</p>
+      <button id="callBtn" class="primary">🎤 Start call</button>
+      <div id="callCtl" hidden>
+        <button id="muteBtn">Mute</button>
+        <button id="spkBtn">Speaker off</button>
+        <label class="vol">Volume <input id="vol" type="range" min="0" max="1" step="0.05" value="1"></label>
+      </div>
+    </div>
+  </aside>
+  <main>
+    <div id="msgs" class="msgs" aria-live="polite"><p id="empty" class="empty">No messages yet. Say hi 👋</p></div>
+    <div id="emo" class="emo" hidden></div>
+    <form id="form" class="composer">
+      <button type="button" id="emoBtn" class="icon" aria-label="Emoji">😊</button>
+      <input id="text" maxlength="1000" autocomplete="off" placeholder="Type a message" aria-label="Message">
+      <button class="primary send" aria-label="Send">Send</button>
+    </form>
+  </main>
+</section>
+
+<div id="incoming" class="modal" hidden role="alertdialog" aria-labelledby="inTxt">
+  <div class="card"><p id="inTxt"></p><button id="accept" class="primary">Accept</button><button id="decline" class="danger">Decline</button></div>
+</div>
+<div id="audios"></div>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

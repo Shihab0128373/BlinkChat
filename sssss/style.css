@@ -1,0 +1,52 @@
+:root{--bg:#0b141a;--panel:#111b21;--line:#222d34;--in:#202c33;--out:#005c4b;--g:#25d366;--tx:#e9edef;--mu:#8696a0;--red:#f15c6d}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+[hidden]{display:none!important}
+button,input{font:inherit;color:inherit}
+button{background:var(--in);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}
+button:hover{filter:brightness(1.2)}
+button.primary{background:var(--g);color:#06210f;border:0;font-weight:600}
+button.danger{color:var(--red)}
+button.small{padding:6px 10px;font-size:14px}
+button.icon{padding:8px 10px;background:none;border:0;font-size:20px}
+:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+input{background:var(--in);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.landing{min-height:100%;display:grid;place-items:center;padding:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;width:min(420px,100%);display:grid;gap:10px}
+h1{margin:0;font-size:2rem;color:var(--g)} h2{font-size:.95rem;margin:0 0 8px;color:var(--mu);font-weight:600}
+.sub,.muted,.note{color:var(--mu);font-size:.9rem;margin:0}
+label{font-size:.85rem;color:var(--mu)}
+.or{text-align:center;color:var(--mu);font-size:.85rem;margin:6px 0}
+.err{color:var(--red);margin:0}.busy{display:flex;gap:8px;align-items:center;margin:0}
+.spin{width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--g);border-radius:50%;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:3s}}
+.room{height:100dvh;display:grid;grid-template-columns:290px 1fr;grid-template-rows:auto 1fr}
+header{grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line)}
+.title{display:grid;margin-right:auto;min-width:0}.title strong,.title small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.title small{color:var(--mu);font-size:.75rem}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--mu)}.dot.ok{background:var(--g)}.dot.warn{background:#f5b942}.dot.err{background:var(--red)}
+.status{font-size:.8rem;color:var(--mu)}
+aside{background:var(--panel);border-right:1px solid var(--line);padding:14px;overflow:auto;display:flex;flex-direction:column;gap:18px}
+#people{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+#people li{display:flex;justify-content:space-between;gap:8px;background:var(--in);border-radius:10px;padding:8px 10px}
+#people small{color:var(--mu)}#people small.live{color:var(--g)}
+.voice{display:grid;gap:8px}.vol{display:grid;gap:4px}#callCtl{display:grid;gap:8px}
+main{display:flex;flex-direction:column;min-height:0;background:#0b141a radial-gradient(#13222a 1px,transparent 1px) 0 0/22px 22px}
+.msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:6px}
+.empty{margin:auto;color:var(--mu)}
+.msg{max-width:min(75%,520px);padding:7px 10px;border-radius:12px;background:var(--in);overflow-wrap:anywhere;white-space:pre-wrap}
+.msg.out{align-self:flex-end;background:var(--out);border-bottom-right-radius:3px}.msg.in{border-bottom-left-radius:3px}
+.msg b{display:block;font-size:.8rem;color:var(--g)}.msg time{display:block;text-align:right;font-size:.7rem;color:var(--mu)}
+.sys{align-self:center;font-size:.8rem;color:var(--mu);background:var(--panel);padding:3px 10px;border-radius:99px}
+.composer{display:flex;gap:8px;padding:10px;background:var(--panel);align-items:center}
+.emo{display:flex;flex-wrap:wrap;gap:2px;padding:6px 10px;background:var(--panel)}.emo button{background:none;border:0;font-size:22px;padding:4px 6px}
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:5}
+.only-m{display:none}
+@media (max-width:800px){
+ .room{grid-template-columns:1fr}.only-m{display:block}
+ aside{position:fixed;inset:0 20% 0 0;z-index:4;transform:translateX(-100%);transition:transform .2s}
+ aside.open{transform:none}
+ header .small{padding:6px 8px}.status{display:none}
+}
